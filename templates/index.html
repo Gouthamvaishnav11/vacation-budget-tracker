@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vacation Budget Tracker</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+</head>
+<body>
+  <div class="container">
+    <h1>🏖️ Vacation Budget Tracker</h1>
+   
+
+
+    <form action="/add" method="POST">
+      <input type="text" name="name" placeholder="Expense name" required />
+      <input type="number" name="amount" placeholder="Amount (₹)" required />
+      <button type="submit">Add Expense</button>
+    </form>
+
+    <ul>
+      {% for expense in expenses %}
+      <li>
+        {{ expense.name }} - ₹{{ expense.amount }}
+        <a href="/delete/{{ expense.id }}"><i class="fas fa-trash"></i></a>
+        <a href="/edit/{{ expense.id }}"><i class="fas fa-edit"></i></a>
+
+      </li>
+      {% endfor %}
+    </ul>
+
+    <h2>Total: ₹<span id="total">{{ total }}</span></h2>
+  </div>
+</body>
+</html>
